@@ -1,55 +1,28 @@
 # LocalChat
 
-A privacy-first iOS chat app powered entirely by on-device intelligence. All conversations stay on your iPhone — nothing is sent to the cloud.
+An iOS project intended for on-device language-model chat. The **public source is an incomplete starter project**, rather than the full chat implementation described by earlier documentation.
 
-## Features
+## Current state
 
-- **On-Device LLM** — Uses Apple Intelligence (Foundation Models) as the primary backend with Core ML fallback
-- **Liquid Glass UI** — Built with iOS 26's native Liquid Glass design system
-- **Streaming Responses** — Real-time token-by-token output with typing indicators
-- **Copy & Retry** — Copy any assistant response or regenerate it with one tap
-- **Adaptive Theming** — Supports both light and dark mode automatically
-- **Keyboard Handling** — Tap to dismiss, interactive scroll dismissal
-- **Zero Data Collection** — No analytics, no network calls, no tracking
+- `LocalChat/ContentView.swift` contains the SwiftUI/Core Data sample list interface.
+- `LocalChat/Persistence.swift` provides the sample persistence container.
+- `LocalChat/Views/LocalLLMError+Equatable.swift` references `LocalLLMError`, whose definition is absent from this branch. A clean build may fail on this missing type.
+- No inference service, model weights, streaming chat view, or Core ML fallback is included in the public tree.
 
-## Requirements
+## Open the project
 
-- iOS 26.0+
-- Xcode 26+
-- iPhone with Apple Intelligence support (A17 Pro or later)
+The checked-in deployment target is **iOS 26.0**. Use Xcode with a compatible iOS SDK:
 
-## Architecture
-
-```
-LocalChat/
-├── LocalChatApp.swift          # App entry point
-├── ContentView.swift           # Main layout & navigation
-├── Models/
-│   └── ChatMessage.swift       # Message data model
-├── ViewModels/
-│   └── ChatViewModel.swift     # State management & business logic
-├── Services/
-│   └── LocalLLMService.swift   # LLM inference (Apple Intelligence + Core ML)
-└── Views/
-    ├── ChatBubbleView.swift    # Message rows (assistant & user)
-    ├── ChatInputBar.swift      # Text input with glass styling
-    ├── ConversationHeaderView.swift  # Header with action buttons
-    └── EmptyStateView.swift    # Welcome screen with suggestion cards
+```sh
+git clone https://github.com/Neel-Sh/Local_LLM_iOS.git
+cd Local_LLM_iOS
+open LocalChat.xcodeproj
 ```
 
-**Pattern:** MVVM with `@MainActor` for thread safety. The `LocalLLMService` is an actor-isolated singleton that handles streaming inference.
+Select your own signing team for device builds. The `LocalChatTests` and `LocalChatUITests` folders contain starter tests; they do not verify model inference.
 
-## Getting Started
+## Next steps
 
-1. Clone the repo
-2. Open `LocalChat.xcodeproj` in Xcode 26+
-3. Select a physical device (Apple Intelligence requires real hardware)
-4. Build and run
+Complete the missing model service and error types, wire a chat interface to that service, and document hardware requirements only after the implementation and device behavior have been verified.
 
-## Screenshots
-
-> Coming soon
-
-## License
-
-MIT
+See [Contributing](CONTRIBUTING.md). The original README identifies this project as MIT-licensed, but a standalone license text is not currently included.
